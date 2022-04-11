@@ -1,0 +1,30 @@
+{
+    "name": "zoom-scraper",
+    "version": "1.0.0",
+    "description": "Puppeteer module to scrape Zoom participant data",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zearibrahim/zoom-scraper.git"
+    },
+    "keywords": [
+        "Puppeteer",
+        "Zoom",
+        "Node"
+    ],
+    "author": "zearibrahim",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/zearibrahim/zoom-scraper/issues"
+    },
+    "homepage": "https://github.com/zearibrahim/zoom-scraper#readme",
+    "dependencies": {
+        "puppeteer": "^13.5.2"
+    },
+    "devDependencies": {
+        "dotenv": "^16.0.0"
+    }
+}

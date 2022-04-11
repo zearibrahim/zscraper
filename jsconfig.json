@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "jsx": "preserve",
+        "target": "es5",
+        "strictFunctionTypes": true,
+        "checkJs": true
+    },
+    "exclude": [
+        "node_modules",
+        "**/node_modules/*"
+    ],
+}
