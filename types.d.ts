@@ -1,9 +1,9 @@
 
 /**
- * Interface type definition for a student.
- * defines one student part of the Zoom data scrapping.
+ * Interface type definition for a participant.
+ * defines one participant part of the Zoom data scrapping.
  */
-declare interface IZoomStudent {
+declare interface IZoomParticipant {
     name: string;
     email: string;
     duration: string;
@@ -11,22 +11,22 @@ declare interface IZoomStudent {
 }
 
 /**
- * Interface type definition to for multiple students.
- * Requires {@link IZoomStudent}.
+ * Interface type definition to for multiple participants.
+ * Requires {@link IZoomParticipant}.
  */
-declare interface IZoomStudents extends Array<IZoomStudent> { }
+declare interface IZoomParticipants extends Array<IZoomParticipant> { }
 
 /**
  * Interface type definition for a Zoom Meeting.
- * Requires {@link IZoomStudents}.
+ * Requires {@link IZoomParticipants}.
  */
 declare interface IZoomMeeting {
     id: string;
-    class: string;
+    topic: string;
     date: string;
     timeFromTopic: string;
     host: string;
-    students: IZoomStudents;
+    participants: IZoomParticipants;
 }
 
 /**

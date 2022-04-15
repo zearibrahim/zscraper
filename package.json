@@ -1,8 +1,9 @@
 {
     "name": "zoom-scraper",
     "version": "1.0.0",
-    "description": "Puppeteer module to scrape Zoom participant data",
+    "description": "Puppeteer module to manually scrape Zoom participant data",
     "main": "index.js",
+    "type": "module",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -13,18 +14,17 @@
     "keywords": [
         "Puppeteer",
         "Zoom",
-        "Node"
+        "Meeting",
+        "Participant",
+        "Scraper"
     ],
     "author": "zearibrahim",
-    "license": "ISC",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/zearibrahim/zoom-scraper/issues"
     },
     "homepage": "https://github.com/zearibrahim/zoom-scraper#readme",
     "dependencies": {
         "puppeteer": "^13.5.2"
-    },
-    "devDependencies": {
-        "dotenv": "^16.0.0"
     }
 }
