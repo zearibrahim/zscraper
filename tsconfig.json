@@ -1,0 +1,23 @@
+//https://www.typescriptlang.org/docs/handbook/declaration-files/dts-from-js.html
+{
+    "compilerOptions": {
+        "target": "es6",
+        "moduleResolution": "Node",
+        "allowJs": true,
+        "checkJs": true,
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "noImplicitAny": true,
+        "preserveConstEnums": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "forceConsistentCasingInFileNames": true,
+        "outDir": "dist",
+    },
+    "exclude": [
+        "node_modules",
+        "**/node_modules/*",
+        "dist",
+        "examples"
+    ]
+}

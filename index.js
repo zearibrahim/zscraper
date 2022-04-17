@@ -1,28 +1,28 @@
-import Puppeteer from "puppeteer";
-import * as messages from "./messages.js";
-
+import * as Puppeteer from 'puppeteer';
+import * as messages from "./messages.js"
 /**
- * Zoom class and functions for https://www.navitas.zoom.us
+ * Zoom class and functions for https://www.navitas.zoom.us.
  * @author Zear Ibrahim
  */
-export default class Zoom {
 
+export default class Zoom {
     /**
-     * Instantiate the Zoom object
+     * Instantiate the Zoom object and org name.
+     * @param {String} org 
      */
-    constructor() {
-        this.loginUrl = "https://navitas.zoom.us/signin";
-        this.reportsUrl = "https://navitas.zoom.us/account/my/report";
+    constructor(org) {
+        this.loginUrl = "https://" + org + ".zoom.us/signin ";
+        this.reportsUrl = "https://" + org + ".zoom.us/account/my/report";
         console.log(`[${Zoom.name}] Has been started`);
     }
 
     /**
      * Login to Zoom using the provided credentials.
-     * * NOTE: This login method requires a pre-configured authenticator to approve the login attempt.
+     * * NOTE: This login method requires a pre-configured authenticator such as mobile phone to approve the login attempt.
      * @param {Puppeteer.Page} page a blank puppeteer page.
      * @param {String} username a string username for {@link loginUrl} using {@type {Env}} entries.
      * @param {String} password a string password for {@link loginUrl} using {@type {Env}} entries.
-     * @throws {@link messages.TIMEOUT} times out upon Microsoft authentication failure.
+     * @throws {@link messages.TIMEOUT} times out upon authentication failure.
      */
     async login(page, username, password) {
         console.log(`[${Zoom.name}] Opening [${this.loginUrl}]`);
@@ -55,7 +55,7 @@ export default class Zoom {
         await page
             .waitForSelector("#headerPic", { visible: true })
             .then(() => console.log(`[${Zoom.name}] ${messages.SUCCESS_LOGIN} on [${this.loginUrl}]`))
-            .catch(error => {
+            .catch(() => {
                 console.log(`[${Zoom.name}] ${messages.TIMEOUT}`);
                 process.exit(1);
             });
@@ -67,7 +67,7 @@ export default class Zoom {
      * @param {String} _from optional from date "mm/dd/yyyy".
      * @param {String} _to optional to date "mm/dd/yyyy".
      * @todo apply _from and _to date validation and ensure page is logged in.
-     * @returns {Promise<IZoomMeetings>} data interface representing list of participants.
+     * @returns {Promise<import("./interfaces").IZoomMeetings>} data interface representing list of participants.
      */
     async getMeetings(page, _from, _to) {
         const url = this.reportsUrl + ((!_from || !_to) ? _getForIncompleteRegisters() : "?from=" + _from + "&to=" + _to);
@@ -76,8 +76,13 @@ export default class Zoom {
         //await page.goto('file:/Users/Zear/Documents/vscode-workspace/bulmarking/scraper/test/reporting-page.html');
         await page.goto(url);
 
+
         //check if meetings are spread across multiple pages
         const meetingCountOnPage = await _getMeetingsCount(page);
+
+        /**
+         * @type {any[]}
+         */
         const meetings = [];
 
         //If reports are spread over multiple pages then loop over each page. Otherwise grab current page only.
@@ -98,7 +103,7 @@ export default class Zoom {
 /**
  * Get all participants for a given Zoom meeting modal table.
  * @param {Puppeteer.Page} page a puppeteer page the where meeting modal table is active and shown.
- * @returns {Promise<IZoomMeetings>} a data interface representing a list of meetings.
+ * @returns {Promise<import("./interfaces").IZoomMeetings>} a data interface representing a list of meetings.
  */
 async function _getParticipantsForMeeting(page) {
     //Enable logging from browser
@@ -167,7 +172,7 @@ async function _getParticipantsForMeeting(page) {
 async function _getMeetingsCount(page) {
     let count = 0;
     try {
-        count = parseInt(await page.$eval("#paginationDivMeeting > div > span > span", el => el.innerHTML));
+        count = parseInt(await page.$eval("#paginationDivMeeting > div > span > span", ( /** @type {{ innerHTML: any; }} */ el) => el.innerHTML));
         console.log(`[${Zoom.name}] Meetings are spread over a number of pages. Found [${count}] records.`);
     } catch (error) {
         console.log(`[${Zoom.name}] This is a single page, grabbing current page data only.`);

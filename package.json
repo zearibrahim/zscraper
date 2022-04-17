@@ -1,8 +1,9 @@
 {
-    "name": "zoom-scraper",
+    "name": "zscraper",
     "version": "1.0.0",
-    "description": "Puppeteer module to manually scrape Zoom participant data",
+    "description": "Puppeteer based module to manually scrape Zoom participant data",
     "main": "index.js",
+    "types": "./dist/index.d.ts",
     "type": "module",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -26,5 +27,8 @@
     "homepage": "https://github.com/zearibrahim/zoom-scraper#readme",
     "dependencies": {
         "puppeteer": "^13.5.2"
+    },
+    "devDependencies": {
+        "typescript": "^4.6.3"
     }
 }
