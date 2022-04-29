@@ -1,10 +1,10 @@
 # zscraper
 
-Node.js module to manually scrape Zoom participant data using [Puppeteer](https://github.com/puppeteer/puppeteer).
+Node.js module to scrape Zoom participant data manually using [Puppeteer](https://github.com/puppeteer/puppeteer).
 
 ## Notes
 
-This module visits the [Zoom reporting pages](https://zoom.us/account/my/report) for your organisation. Authentication is handled manually and requires users to approve the login attempt through an authenticator when running on CLI.
+This module scrapes Zoom conference participant data by visiting the [reporting pages](https://zoom.us/account/my/report) for your organisation. Authentication is handled manually and requires users to approve the login attempt through a pre-configured authenticator app.
 
 This module maybe useful for users when:
 * They cannot configure or use the Zoom API,
@@ -38,7 +38,7 @@ const browser = await Puppeteer.launch(puppeteerOptions);
 const page = await browser.newPage();
 ```
 
-### Create ZoomScraper Instance
+### Create a ZoomScraper Instance
     Note: Organisation must hold an active Zoom license
 ```js
 // Instantiate scraper with your organisations' name
@@ -59,7 +59,7 @@ This method returns all meetings between the given dates in `mm/dd/yyyy` format.
 const meetings = await zoom.getMeetings(page, "04/01/2022", "04/03/2022");
 ```
 ### Output
-The meeting object may be printed in accordance with the [Meeting Interface Types](#meeting-interface-types).
+Once pupulated, the meeting object may be printed in accordance with the [Meeting Interface Types](#meeting-interface-types).
 ```js
 // Print all details
 console.log(meetings[0]);
@@ -101,16 +101,16 @@ interface IZoomParticipants extends Array<IZoomParticipant> { }
 
 A single participant is represented through the `IZoomParticipant` interface type:
 ```ts
-[
+interface IZoomParticipant {
     name: string;
     email: string;
     duration: string;
     guest: string;
-]
+}
 ```
 
 ## How To Run
-Place the [example](#example) code in an `index.js` file at the `root` of your project. 
+Place the [example](#example) code in an `index.js` file at the `root` of a new Node.js project. 
 
 ```sh
 $ node index.js

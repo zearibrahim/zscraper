@@ -1,7 +1,7 @@
 {
     "name": "zscraper",
     "version": "1.0.0",
-    "description": "Puppeteer based module to manually scrape Zoom participant data",
+    "description": "Node.js module to scrape Zoom participant data manually using",
     "main": "index.js",
     "types": "./dist/index.d.ts",
     "type": "module",
@@ -10,7 +10,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/zearibrahim/zoom-scraper.git"
+        "url": "git+https://github.com/zearibrahim/zscraper.git"
     },
     "keywords": [
         "Puppeteer",
@@ -22,9 +22,9 @@
     "author": "zearibrahim",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/zearibrahim/zoom-scraper/issues"
+        "url": "https://github.com/zearibrahim/zscraper/issues"
     },
-    "homepage": "https://github.com/zearibrahim/zoom-scraper#readme",
+    "homepage": "https://github.com/zearibrahim/zscraper#readme",
     "dependencies": {
         "puppeteer": "^13.5.2"
     },
