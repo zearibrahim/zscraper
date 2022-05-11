@@ -2,6 +2,7 @@
     "name": "zscraper",
     "version": "1.0.2",
     "description": "Node.js module to scrape Zoom participant data manually using Puppeteer",
+    "type": "module",
     "main": "index.js",
     "directories": {
         "example": "examples"

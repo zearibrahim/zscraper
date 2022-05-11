@@ -19,9 +19,9 @@ export default class Zoom {
     /**
      * Login to Zoom using the provided credentials.
      * * NOTE: This login method requires a pre-configured authenticator such as mobile phone to approve the login attempt.
-     * @param {Puppeteer.Page} page a blank puppeteer page.
-     * @param {String} username a string username for {@link loginUrl} using {@type {Env}} entries.
-     * @param {String} password a string password for {@link loginUrl} using {@type {Env}} entries.
+     * @param {Puppeteer.Page} page - a blank puppeteer page.
+     * @param {String} username - a string username for {@link loginUrl} using {@type {Env}} entries.
+     * @param {String} password - a string password for {@link loginUrl} using {@type {Env}} entries.
      * @throws {@link messages.TIMEOUT} times out upon authentication failure.
      */
     async login(page, username, password) {
@@ -63,9 +63,9 @@ export default class Zoom {
 
     /**
      * Get meeting data from the Zoom reporting window.
-     * @param {Puppeteer.Page} page a puppeteer page logged into Zoom.
-     * @param {String} _from optional from date "mm/dd/yyyy".
-     * @param {String} _to optional to date "mm/dd/yyyy".
+     * @param {Puppeteer.Page} page - a puppeteer page logged into Zoom.
+     * @param {String} _from - optional from date "mm/dd/yyyy".
+     * @param {String} _to - optional to date "mm/dd/yyyy".
      * @todo apply _from and _to date validation and ensure page is logged in.
      * @returns {Promise<import("./interfaces").IZoomMeetings>} data interface representing list of participants.
      */
@@ -73,15 +73,14 @@ export default class Zoom {
         const url = this.reportsUrl + ((!_from || !_to) ? _getForIncompleteRegisters() : "?from=" + _from + "&to=" + _to);
         console.log(`[${Zoom.name}] Opening reporting page on [${url}]`);
 
-        //await page.goto('file:/Users/Zear/Documents/vscode-workspace/bulmarking/scraper/test/reporting-page.html');
         await page.goto(url);
-
 
         //check if meetings are spread across multiple pages
         const meetingCountOnPage = await _getMeetingsCount(page);
 
+
         /**
-         * @type {any[]}
+         * @type {import("./interfaces").IZoomMeetings | PromiseLike<import("./interfaces").IZoomMeetings>}
          */
         const meetings = [];
 
@@ -102,7 +101,7 @@ export default class Zoom {
 
 /**
  * Get all participants for a given Zoom meeting modal table.
- * @param {Puppeteer.Page} page a puppeteer page the where meeting modal table is active and shown.
+ * @param {Puppeteer.Page} page - a puppeteer page the where meeting modal table is active and shown.
  * @returns {Promise<import("./interfaces").IZoomMeetings>} a data interface representing a list of meetings.
  */
 async function _getParticipantsForMeeting(page) {
@@ -141,7 +140,7 @@ async function _getParticipantsForMeeting(page) {
                 participants.push({ name: cell[0], email: cell[1], duration: cell[4], guest: cell[5] });
             }
 
-            //push meeting and participant info to list. Note ID is not unique.
+            //push meeting and participant info to list. Note meeting ID from Zoom is not unique.
             meetings.push({
                 id: meetingData[1],
                 topic: meetingData[0],
@@ -166,8 +165,8 @@ async function _getParticipantsForMeeting(page) {
 
 /**
  * Function to return the number of meetings on the page. 
- * @param {Puppeteer.Page} page a puppeteer page containing the Zoom meeting table to process.
- * @returns {Promise<number>} total meetings, 0 if meetings are all on a single page.
+ * @param {Puppeteer.Page} page - a puppeteer page containing the Zoom meeting table to process.
+ * @returns {Promise<number>} - total meetings, 0 if meetings are all on a single page.
  */
 async function _getMeetingsCount(page) {
     let count = 0;
